@@ -6,7 +6,7 @@
 
 .head-line svg{
   width: 430px;
-  padding: 30px 0 40px;
+  padding: 70px 0 40px;
 }
 
 .menus{
@@ -16,12 +16,94 @@
   border-top:1px solid #ebebeb;
   border-bottom:4px double #323232;
 }
+.hamburger-button {
+  display: none; /* 기본적으로 숨김 */
+  background: url(./images/menu_icon.png)no-repeat 50% 50%;
+  background-size: cover;
+  width: 22px;
+  height: 22px;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top:15px;
+  left: 20px;
+  z-index: 300;
+}
+
+
+
+
+
+ /* 검색 아이콘 스타일 */
+.search-container {
+  position: absolute;
+  top: 10px;
+  left: 60px;
+  z-index: 300;
+}
+
+.search-icon {
+  background: url(./images/search_icon.png)no-repeat 50% 50%;
+  background-size: cover;
+  width: 30px;
+  height: 30px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+
+/* 검색창 스타일 (기본적으로 숨김) */
+.search-box {
+  display: none;
+  position: absolute;
+  width: 300px;
+  top:0px;
+  left: 50px;
+  background: white;
+  /* border: 1px solid #eeeeee; */
+  padding: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  z-index: 200;
+}
+
+
+.search-box #search-input {
+  padding: 5px;
+  width: 180px;
+  border-bottom:1px solid #1b1b1b ;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  outline: none;
+}
+
+
+.box-search-icon{
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: none;
+  padding: 5px 13px;
+  border-bottom:1px solid #1b1b1b ;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  margin-left: -6px;
+  color: #727272;
+}
+.box-search-icon:hover{
+  color: #1d1d1d;
+}
+
+
 
 .menus button{
   background: none;
   border: none;
   outline: none;
-  padding: 5px 8px;
+  padding: 5px 16px;
 }
 
 .menus button:hover{
@@ -38,3 +120,30 @@
   object-fit: cover;
 }
 
+@media screen and (max-width: 768px) {
+  .menus {
+      display: none; /* 기본적으로 메뉴 숨김 */
+      flex-direction: column;
+      align-items: center;
+      background: white;
+      position: absolute;
+      padding-top: 60px;
+      top: 0px;
+      left: 0;
+      width: 50%;
+      border-top: 1px solid #ebebeb;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .hamburger-button {
+      display: block; /* 모바일에서는 햄버거 버튼 보이게 */
+  }
+
+  .menus button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      border-bottom: 1px solid #ebebeb;
+      text-align: center;
+  }
+}
