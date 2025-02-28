@@ -17,36 +17,46 @@ const menus = document.querySelectorAll(".menus button");
 // 버튼 클릭하면 카테고리별 뉴스 가져오기
 menus.forEach(menu => menu.addEventListener("click", (event) => getNewsByCategory(event)));
 
+let url = new URL(`https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=kr`);
+
+
 // 공통된 뉴스 가져오는 함수
-const fetchNews = async (url) => {
-  try {
+const fetchNews = async() => {
+  try{
     const response = await fetch(url);
     const data = await response.json();
-    newsList = data.articles;
-    render();
-  } catch (error) {
-    console.error("오류:", error);
+if(response.status === 200){
+  if(data.articles.length===0){
+    throw new Error("no result for this search")
+  }
+  newsList = data.articles;
+  render();
+}else{
+throw new Error(data.message)
+}
+  }catch(error){
+errorRender(error.message)
   }
 };
 
 // 최신 뉴스 가져오기
-const getLatestNews = () => {
-  const url = new URL(`https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=kr`);
-  fetchNews(url);
+const getLatestNews = async() => {
+  url = new URL(`https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=kr`);
+  fetchNews();
 };
 
 // 카테고리별 뉴스 가져오기
-const getNewsByCategory = (event) => {
+const getNewsByCategory = async(event) => {
   const category = event.target.textContent.toLowerCase();
-  const url = new URL(`https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=kr&category=${category}`);
-  fetchNews(url);
+  url = new URL(`https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=kr&category=${category}`);
+  fetchNews();
 };
 
 // 키워드 검색 뉴스 가져오기
-const getNewsByKeyword = () => {
+const getNewsByKeyword = async() => {
   const keyword = document.getElementById("search-input").value;
-  const url = new URL(`https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=kr&q=${keyword}`);
-  fetchNews(url);
+  url = new URL(`https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=kr&q=${keyword}`);
+  fetchNews();
 };
 
 // 날짜를 "X days ago" 형태로 변환하는 함수
@@ -108,6 +118,14 @@ const render = () => {
 
   document.getElementById("news-board").innerHTML = newsHTML;
 };
+
+const errorRender = (errorMessage) =>{
+  const errorHTML = `<div class="alert alert-danger" role="alert">
+  ${errorMessage}
+</div>`;
+
+document.getElementById("news-board").innerHTML = errorHTML
+}
 
 // 최신 뉴스 가져오기 실행
 getLatestNews();
