@@ -99,7 +99,7 @@ const render = () => {
             onerror="this.onerror=null; this.src='./images/no_img.png';">
         </div>
         <div class="col-lg-8">
-          <h2>${news.title}</h2>
+          <h2 class="title">${news.title}</h2>
           <p>${description}</p>
           <div>${sourceName} - ${formattedDate}</div>
         </div>

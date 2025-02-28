@@ -30,8 +30,9 @@
   z-index: 300;
 }
 
-
-
+.title{
+  padding: 10px 0;
+}
 
 
  /* 검색 아이콘 스타일 */
@@ -133,6 +134,11 @@
       width: 50%;
       border-top: 1px solid #ebebeb;
       box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .menus.show {
+    display: flex;
+    flex-direction: column;
   }
 
   .hamburger-button {
