@@ -120,6 +120,22 @@
   max-height: 250px;
   object-fit: cover;
 }
+nav.pagination-box{
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+.page-link {
+  /* border-color:  #f9d570; */
+  color: #a1a1a1;
+}
+.active>.page-link, .page-link.active {
+  background-color: #1f1f1f;
+    border-color:  #1f1f1f;
+    color: #fff;
+}
+
+
 
 @media screen and (max-width: 768px) {
   .menus {
