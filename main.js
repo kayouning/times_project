@@ -138,60 +138,50 @@ document.getElementById("news-board").innerHTML = errorHTML
 }
 
 const paginationRender=()=>{
-  //totalResult
-  //page
-  //pageSize
-  //groupSize
-  //totalPages
   const totalPages = Math.ceil(totalResults/pageSize)
-  //pageGroup
 const pageGroup = Math.ceil(page/groupSize)
-  //lastPage
-  let lastPage = pageGroup*groupSize
+let lastPage = pageGroup*groupSize
   //마지막 페이지 그룹이 그룹사이즈보다작다? lastPage = totalPages
   if(lastPage>totalPages){
     lastPage = totalPages
-  }
+  };
+
 
 
   //firstPage
   const firstPage = lastPage - (groupSize - 1)<=0 ?1:lastPage - (groupSize - 1);
 
 
-let paginationHTML =``;
+let paginationHTML =""
 
 
+paginationHTML+=`
+<li class="page-item ${page === 1 ? "disabled" : ""}" onclick="moveToPage(1)">
+      <a class="page-link" href="#">«</a>
+    </li><li class="page-item ${page === 1 ? "disabled" : ""}" onclick="moveToPage(${page-1})"><a class="page-link" href="#">‹</a></li>`;
 
 for(let i = firstPage;i<=lastPage;i++){
   paginationHTML+=`<li class="page-item ${i===page?"active":""}" onClick = "moveToPage(${i})"><a class="page-link">${i}</a></li>`
 };
+
+paginationHTML +=`
+<li class="page-item ${page === totalPages ? "disabled" : ""}" onclick="moveToPage(${page+1})">
+<a class="page-link" href="#">›</a></li>
+<li class="page-item ${page === totalPages ? "disabled" : ""}" onclick="moveToPage(${totalPages})">
+      <a class="page-link" href="#">»</a>
+    </li>`
 document.querySelector(".pagination").innerHTML = paginationHTML;
 
 
 
-//   <nav aria-label="Page navigation example">
-//   <ul class="pagination">
-//     <li class="page-item">
-//       <a class="page-link" href="#" aria-label="Previous">
-//         <span aria-hidden="true">&laquo;</span>
-//       </a>
-//     </li>
-//     <li class="page-item"><a class="page-link" href="#">1</a></li>
-//     <li class="page-item"><a class="page-link" href="#">2</a></li>
-//     <li class="page-item"><a class="page-link" href="#">3</a></li>
-//     <li class="page-item">
-//       <a class="page-link" href="#" aria-label="Next">
-//         <span aria-hidden="true">&raquo;</span>
-//       </a>
-//     </li>
-//   </ul>
-// </nav>
-
 };
 const moveToPage=(pageNum)=>{
-  console.log("무브",pageNum);
+  console.log("moveToPage",pageNum);
   page = pageNum;
   fetchNews();
 }
+
+
+
 // 최신 뉴스 가져오기 실행
 getLatestNews();
